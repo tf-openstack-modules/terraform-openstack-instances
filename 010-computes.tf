@@ -2,37 +2,48 @@
 # Create instance
 #
 resource "openstack_compute_instance_v2" "instance" {
-  name        = var.instance.name
-  flavor_name = var.instance.flavor_name
+  name        = var.name
+  flavor_name = var.flavor_name
 
   block_device {
-    uuid                  = var.image.id
+    uuid                  = var.image_id
     source_type           = "image"
-    volume_size           = 20
+    volume_size           = var.block_device_volume_size
     boot_index            = 0
     destination_type      = "volume"
-    delete_on_termination = true
+    delete_on_termination = var.block_device_delete_on_termination
   }
 
   key_pair = var.key_pair_name
 
-  scheduler_hints {
-    group = var.servergroup_id
+  dynamic "scheduler_hints" {
+    for_each = var.server_groups
+    content {
+      group = scheduler_hints.value
+    }
   }
 
-  network {
-    port = openstack_networking_port_v2.port.id
+  dynamic "network" {
+    for_each = openstack_networking_port_v2.port
+    content {
+      port = network.value["id"]
+    }
   }
+
 }
 
 # Create network port
+
 resource "openstack_networking_port_v2" "port" {
-  name = var.instance.port_name
-  network_id     = var.network_id
-  admin_state_up = true
-  security_group_ids = var.security_group_ids
+  count = length(var.ports)
+
+  name = var.ports[count.index].name
+  network_id = var.ports[count.index].network_id
+  admin_state_up = lookup(var.ports[count.index], "admin_state_up", null) == null ? true : var.ports[count.index].admin_state_up
+  security_group_ids = lookup(var.ports[count.index], "security_group_ids", null) == null ? [] : var.ports[count.index].security_group_ids
   fixed_ip {
-    subnet_id = var.subnet_id
+    subnet_id = var.ports[count.index].subnet_id
+    ip_address = lookup(var.ports[count.index], "ip_address", null) == null ? null : var.ports[count.index].ip_address
   }
 }
 
@@ -42,7 +53,7 @@ resource "openstack_networking_floatingip_v2" "ip" {
 }
 
 # Attach floating ip to instance
-resource "openstack_compute_floatingip_associate_v2" "master" {
+resource "openstack_compute_floatingip_associate_v2" "ipa" {
   floating_ip = openstack_networking_floatingip_v2.ip.address
   instance_id = openstack_compute_instance_v2.instance.id
 }
