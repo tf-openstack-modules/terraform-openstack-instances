@@ -1,3 +1,10 @@
+# [0.2.0](https://github.com/tf-openstack-modules/terraform-openstack-instances/compare/v0.1.1...v0.2.0) (2020-12-02)
+
+
+### Features
+
+* **refactor:** Refactor input variables ([c1187f5](https://github.com/tf-openstack-modules/terraform-openstack-instances/commit/c1187f52f621fea70412bd5a1d2899d962bf6c4f))
+
 ## [0.1.1](https://github.com/tf-openstack-modules/terraform-openstack-instances/compare/v0.1.0...v0.1.1) (2020-12-02)
 
 
