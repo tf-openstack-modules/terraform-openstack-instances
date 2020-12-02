@@ -1,0 +1,22 @@
+name: Release
+
+# Run the workflow when a Pull Request is opened or when changes are pushed to master
+on:
+ push:
+  branches: [ master ]
+
+jobs:
+ release:
+  runs-on: ubuntu-latest
+  steps:
+  - name: Checkout
+    uses: actions/checkout@v2
+
+  - name: Setup Node.js
+    uses: actions/setup-node@v1
+    with:
+      node-version: 12.x
+  - name: Release
+    run: npx -p @semantic-release/commit-analyzer -p @semantic-release/release-notes-generator -p @semantic-release/github -p @semantic-release/changelog -p @semantic-release/git -p semantic-release semantic-release --
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
