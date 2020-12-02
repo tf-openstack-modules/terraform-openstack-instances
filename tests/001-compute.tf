@@ -3,7 +3,7 @@ module "test_instance_simple" {
 
 	name = ""
 	flavor_name = "m1.xs" 
-  image_id = "aa3496d7-5f0e-4ff1-a068-5af50fc5e963"
+	image_id = "aa3496d7-5f0e-4ff1-a068-5af50fc5e963"
 	key_pair_name = "le nom que je veux lui donner"
 	public_ip_network = "floating"
 }
@@ -13,7 +13,7 @@ module "test_instance_ports" {
 
 	name = "super_name"
 	flavor_name = "m1.xs" 
-  image_id = "aa3496d7-5f0e-4ff1-a068-5af50fc5e963"
+	image_id = "aa3496d7-5f0e-4ff1-a068-5af50fc5e963"
 	key_pair_name = "le nom que je veux lui donner"
 	public_ip_network = "floating"
 	ports = [
@@ -35,7 +35,7 @@ module "test_instance_server_groups" {
 
 	name = "super_name"
 	flavor_name = "m1.xs" 
-  image_id = "aa3496d7-5f0e-4ff1-a068-5af50fc5e963"
+	image_id = "aa3496d7-5f0e-4ff1-a068-5af50fc5e963"
 	key_pair_name = "le nom que je veux lui donner"
 	public_ip_network = "floating"
 	server_groups = ["192.168.0.1", "192.168.0.2", "192.168.0.3"]
