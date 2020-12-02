@@ -31,19 +31,20 @@ variable "public_ip_network" {
   description = <<EOF
 The name of the network who give floating IPs
 EOF
+  default = null
 }
 
 variable "ports" {
-  type = list(any)
+  type = list(object({
+    name = string
+    network_id = string
+    subnet_id = string
+    admin_state_up = optional(bool)
+    security_group_ids = optional(list(string))
+    ip_address = optional(string)
+  }))
   description = <<EOF
-The ports list can take object like this :
-ports:
-- name: `required`
-  network_id: `required`
-  subnet_id: `required`
-  admin_state_up: `optional`, `default: true`
-  security_group_ids: `optional`, `default: []`
-  ip_address: `optional`, `default: []`
+The ports list
 EOF
   default = []
 }
