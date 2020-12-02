@@ -1,6 +1,5 @@
 name: Release
 
-# Run the workflow when a Pull Request is opened or when changes are pushed to master
 on:
  push:
   branches:
@@ -20,4 +19,4 @@ jobs:
   - name: Release
     run: npx -p @semantic-release/commit-analyzer -p @semantic-release/release-notes-generator -p @semantic-release/github -p @semantic-release/changelog -p @semantic-release/git -p semantic-release semantic-release --
     env:
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
