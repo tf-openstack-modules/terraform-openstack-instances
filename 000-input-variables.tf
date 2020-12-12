@@ -44,9 +44,8 @@ variable "ports" {
     ip_address = optional(string)
   }))
   description = <<EOF
-The ports list
+The ports list, at least 1 port is required
 EOF
-  default = []
 }
 
 variable "block_device_volume_size" {

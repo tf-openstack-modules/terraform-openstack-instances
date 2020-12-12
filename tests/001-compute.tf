@@ -1,21 +1,10 @@
 module "test_instance_simple" {
   source = "../"
 
-	name = ""
-	flavor_name = "m1.xs" 
-	image_id = "aa3496d7-5f0e-4ff1-a068-5af50fc5e963"
-	key_pair_name = "le nom que je veux lui donner"
-	public_ip_network = "floating"
-}
-
-module "test_instance_ports" {
-  source = "../"
-
-	name = "super_name"
-	flavor_name = "m1.xs" 
-	image_id = "aa3496d7-5f0e-4ff1-a068-5af50fc5e963"
-	key_pair_name = "le nom que je veux lui donner"
-	public_ip_network = "floating"
+	name = "test_instance_simple"
+	flavor_name = local.flavor_name
+	image_id = local.image_id
+	key_pair_name = local.key_pair_name
 	ports = [
 		{
 			name = "port_name",
@@ -30,13 +19,37 @@ module "test_instance_ports" {
 	]
 }
 
+module "test_instance_with_public_ip" {
+  source = "../"
+
+	name = "test_instance_ports"
+	flavor_name = local.flavor_name
+	image_id = local.image_id
+	key_pair_name = local.key_pair_name
+	public_ip_network = local.public_ip_network
+	ports = [
+		{
+			name = "port_name",
+			network_id = "471e10fa-c13c-455c-a78f-f6cb48cd735f",
+			subnet_id = "3740a585-e3d2-425a-9fc5-bd6b479fd01e",
+		}
+	]
+}
+
 module "test_instance_server_groups" {
   source = "../"
 
-	name = "super_name"
-	flavor_name = "m1.xs" 
-	image_id = "aa3496d7-5f0e-4ff1-a068-5af50fc5e963"
-	key_pair_name = "le nom que je veux lui donner"
-	public_ip_network = "floating"
-	server_groups = ["192.168.0.1", "192.168.0.2", "192.168.0.3"]
+	name = "test_instance_server_groups"
+	flavor_name = local.flavor_name
+	image_id = local.image_id
+	key_pair_name = local.key_pair_name
+	public_ip_network = local.public_ip_network
+	server_groups = ["wwww"]
+	ports = [
+		{
+			name = "port_name",
+			network_id = "471e10fa-c13c-455c-a78f-f6cb48cd735f",
+			subnet_id = "3740a585-e3d2-425a-9fc5-bd6b479fd01e",
+		}
+	]
 }
