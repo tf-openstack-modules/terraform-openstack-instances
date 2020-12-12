@@ -25,11 +25,11 @@ resource "openstack_compute_instance_v2" "instance" {
 
   dynamic "network" {
     for_each = openstack_networking_port_v2.port
+
     content {
       port = network.value["id"]
     }
   }
-
 }
 
 # Create network port
@@ -49,14 +49,14 @@ resource "openstack_networking_port_v2" "port" {
 
 # Create floating ip
 resource "openstack_networking_floatingip_v2" "ip" {
-  count = var.public_ip_network == null ? 1 : 0
+  count = var.public_ip_network == null ? 0 : 1
 
   pool = var.public_ip_network
 }
 
 # Attach floating ip to instance
 resource "openstack_compute_floatingip_associate_v2" "ipa" {
-  count = var.public_ip_network == null ? 1 : 0
+  count = var.public_ip_network == null ? 0 : 1
 
   floating_ip = openstack_networking_floatingip_v2.ip[count.index].address
   instance_id = openstack_compute_instance_v2.instance.id
