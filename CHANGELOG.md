@@ -1,3 +1,10 @@
+## [0.2.1](https://github.com/tf-openstack-modules/terraform-openstack-instances/compare/v0.2.0...v0.2.1) (2020-12-13)
+
+
+### Bug Fixes
+
+* **network:** Patch some error on network conf ([d3a3d63](https://github.com/tf-openstack-modules/terraform-openstack-instances/commit/d3a3d63267b20a3b0124da98b0a05a3dc35087a1))
+
 # [0.2.0](https://github.com/tf-openstack-modules/terraform-openstack-instances/compare/v0.1.1...v0.2.0) (2020-12-02)
 
 
