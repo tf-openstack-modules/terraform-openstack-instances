@@ -34,6 +34,14 @@ EOF
   default = null
 }
 
+variable "is_public" {
+  type = bool
+  description = <<EOF
+Boolean who allow you to to make public or not your instance
+EOF
+  default = true
+}
+
 variable "ports" {
   type = list(object({
     name = string
