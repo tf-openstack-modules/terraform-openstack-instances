@@ -1,3 +1,10 @@
+## [0.2.2](https://github.com/tf-openstack-modules/terraform-openstack-instances/compare/v0.2.1...v0.2.2) (2021-08-31)
+
+
+### Bug Fixes
+
+* Add bool to manage public network of the instance ([b2d172e](https://github.com/tf-openstack-modules/terraform-openstack-instances/commit/b2d172e5a3bc1b1f222d1e79379a76fb7f8d9909))
+
 ## [0.2.1](https://github.com/tf-openstack-modules/terraform-openstack-instances/compare/v0.2.0...v0.2.1) (2020-12-13)
 
 
